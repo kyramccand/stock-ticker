@@ -11,7 +11,7 @@ console.log('hey');
 MongoClient.connect(connStr, function(err, dbConn) {
     console.log('connected');
     if(err) {
-        console.log(err);
+        console.log('Error connecting to MongoDB: ' + err);
     }
     else {
         var dbo = dbConn.db("Stock");   // equiv to use library
