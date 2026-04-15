@@ -25,24 +25,24 @@ var port = process.env.PORT || 3000;
 //   }
 // }).listen(port);
 
-const MongoClient = require('mongodb').MongoClient;
-const connStr = "mongodb+srv://database_user:db123@stock.zrcipph.mongodb.net/?appName=Stock";
+// const MongoClient = require('mongodb').MongoClient;
+// const connStr = "mongodb+srv://database_user:db123@stock.zrcipph.mongodb.net/?appName=Stock";
     
-console.log('hey');
-MongoClient.connect(connStr, function(err, dbConn) {
-    console.log('connected');
-    if(err) {
-        console.log(err);
-    }
-    else {
-        var dbo = dbConn.db("Stock");   // equiv to use library
-        var collection = dbo.collection("PublicCompanies");
-        console.log("Success!");
-        // db.close();
-    }
-});
+// console.log('hey');
+// MongoClient.connect(connStr, function(err, dbConn) {
+//     console.log('connected');
+//     if(err) {
+//         console.log(err);
+//     }
+//     else {
+//         var dbo = dbConn.db("Stock");   // equiv to use library
+//         var collection = dbo.collection("PublicCompanies");
+//         console.log("Success!");
+//         // db.close();
+//     }
+// });
 
-// console.log("Server ready");
+console.log("Server ready");
 var server = http.createServer(function (req, res) {
     
     urlObj = url.parse(req.url, true);
