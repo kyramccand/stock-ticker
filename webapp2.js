@@ -1,6 +1,29 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var port = process.env.PORT || 3000;
+//var port = 8080;   //uncomment to run local
+
+// http.createServer(function (req, res) {
+//   res.writeHead(200, {'Content-Type': 'text/html'});
+//   urlObj = url.parse(req.url,true)
+//   if (urlObj.pathname == "/") 
+//   {
+//      res.write ("Success!  This app is deployed online");
+//      res.write("<h2>This is my hello application</h2>");
+//      s = "<form method='get' action='/process'>" +
+//          "Enter the secret ID <input type='text' name='id'><br /><input type='submit'></form>"
+//      res.write(s)
+//      res.end()
+//   }
+//   else if (urlObj.pathname == "/process") {
+//   id = urlObj.query.id
+  
+//   res.write ("The id is: " + id)
+//   res.end();
+//   console.log('hey')
+//   }
+// }).listen(port);
 
 const MongoClient = require('mongodb').MongoClient;
 const connStr = "mongodb+srv://database_user:db123@stock.zrcipph.mongodb.net/?appName=Stock";
@@ -19,53 +42,53 @@ MongoClient.connect(connStr, function(err, dbConn) {
     }
 });
 
-// // console.log("Server ready");
-// var server = http.createServer(function (req, res) {
+// console.log("Server ready");
+var server = http.createServer(function (req, res) {
     
-//     urlObj = url.parse(req.url, true);
-//     // console.log("The URL is: " + req.url);
-//     // console.log("The path is: " + urlObj.pathname);
+    urlObj = url.parse(req.url, true);
+    // console.log("The URL is: " + req.url);
+    // console.log("The path is: " + urlObj.pathname);
 
-//     if (req.url == "/") {
-//         fs.readFile("home.html", function(err, txt) {
-//             res.writeHead(200, {'Content-Type': 'text/html'});
-//             if (err) {
-//                 res.write("Error loading home.html");
-//             } else {
-//                 res.write(txt);
-//             }
-//             res.end();
-//         });
-//     }
-//     else if (urlObj.pathname == "/process") {
-//         fs.readFile("process.html", function(err, txt) {
-//             res.writeHead(200, {'Content-Type': 'text/html'});
-//             if (err) {
-//                 res.write("Error loading process.html");
-//             } else {
-//                 res.write(txt);
-//                 res.write("Showing search results for '" + urlObj.query.stock + "'");
-//                 res.write("Showing search results for '" + urlObj.query['input-type'] + "'");
-//             }
-//             res.end();
-//         });
-//     }
-//     else if (urlObj.pathname == "/styles.css") {
-//         fs.readFile("styles.css", function(err, txt) {
-//             if (err) {
-//                 res.writeHead(404);
-//                 res.end("Style not found");
-//             } else {
-//                 // Browsers REQUIRE 'text/css' to apply styles
-//                 res.writeHead(200, {'Content-Type': 'text/css'});
-//                 res.end(txt);
-//             }
-//         });
-//     }
-//     else {
-//         res.writeHead(404, {'Content-Type': 'text/html'});
-//         res.write("Page not found");
-//         res.end();
-//     }
-// })
-// server.listen(8080);
+    if (req.url == "/") {
+        fs.readFile("home.html", function(err, txt) {
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            if (err) {
+                res.write("Error loading home.html");
+            } else {
+                res.write(txt);
+            }
+            res.end();
+        });
+    }
+    else if (urlObj.pathname == "/process") {
+        fs.readFile("process.html", function(err, txt) {
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            if (err) {
+                res.write("Error loading process.html");
+            } else {
+                res.write(txt);
+                res.write("Showing search results for '" + urlObj.query.stock + "'");
+                res.write("Showing search results for '" + urlObj.query['input-type'] + "'");
+            }
+            res.end();
+        });
+    }
+    else if (urlObj.pathname == "/styles.css") {
+        fs.readFile("styles.css", function(err, txt) {
+            if (err) {
+                res.writeHead(404);
+                res.end("Style not found");
+            } else {
+                // Browsers REQUIRE 'text/css' to apply styles
+                res.writeHead(200, {'Content-Type': 'text/css'});
+                res.end(txt);
+            }
+        });
+    }
+    else {
+        res.writeHead(404, {'Content-Type': 'text/html'});
+        res.write("Page not found");
+        res.end();
+    }
+})
+server.listen(port);
