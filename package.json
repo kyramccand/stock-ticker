@@ -4,19 +4,19 @@
   "description": "example node app for heroku ",
   "main": "webapp2.js",
   "scripts": {
-  "start": "node webapp2.js"
-},
+    "start": "node webapp2.js"
+  },
   "repository": {
-  "type": "git",
-  "url": ""
-},
+    "type": "git",
+    "url": ""
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
-  "url": ""
-},
-  "homepage": ""
-},
-"dependencies": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
     "mongodb": "4.0"
   }
+}
