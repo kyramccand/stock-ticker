@@ -44,12 +44,10 @@ var server = http.createServer(function (req, res) {
                 // Search by ticker symbol
                 if (urlObj.query['input-type'] == "ticker-symbol") {
                     the_query = {"Ticker": urlObj.query.stock};
-                    res.write("Showing search results for the ticker '" + urlObj.query.stock + "'<br>");
                 }
                 // Search by company name
                 else {
                     the_query = {"Company": urlObj.query.stock};
-                    res.write("Showing search results for the company'" + urlObj.query.stock + "'<br>");
                 }
 
                 // Connect to MongoDB Stock->PublicCompanies collection
@@ -71,13 +69,17 @@ var server = http.createServer(function (req, res) {
                             }
                             // Display each result and log it to the console
                             else {
-                                res.write("<hr>");
+                                num_results = items.length;
+                                if (num_results == 0) {
+                                    res.write("There were no results for " + urlObj.query["input-type"] + "=" + urlObj.query.stock + "'<br>");
+                                }
+                                res.write("Showing " + num_results + " search results for '" + urlObj.query["input-type"] + "=" + urlObj.query.stock + "'<br>");
                                 console.log("Searching for " + JSON.stringify(the_query));
                                 for (i = 0; i < items.length; i++) {
                                     console.log(items[i].Company + " " + items[i].Ticker + " $" + items[i].Price);
-                                    res.write("<div class='result-container'>");
+                                    res.write("<hr><div class='result-container'>");
                                     res.write("<div class='company-info'><h3>" + items[i].Company + "</h3><div class='company-ticker'>" + items[i].Ticker + "</div></div> $" + items[i].Price);
-                                    res.write("</div><br><hr>");
+                                    res.write("</div><br>");
                                 }
                                 res.write("</div></div></body></html>");
                                 res.end();
