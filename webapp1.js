@@ -1,7 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
 
-//
 const MongoClient = require("mongodb").MongoClient;
 const connStr = "mongodb+srv://database_user:db123@stock.zrcipph.mongodb.net/?appName=Stock";
 

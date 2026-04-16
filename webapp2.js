@@ -1,8 +1,8 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-// var port = process.env.PORT || 3000;
-var port = 8080;   // uncomment to run local
+var port = process.env.PORT || 3000;
+// var port = 8080;   // uncomment to run local
 
 const MongoClient = require('mongodb').MongoClient;
 const connStr = "mongodb+srv://database_user:db123@stock.zrcipph.mongodb.net/?appName=Stock";
