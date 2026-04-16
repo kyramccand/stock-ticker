@@ -3,11 +3,11 @@ html, body {
     background: #c9b58c;
 }
 
-h1, h2, h3 {
+h1, h2 {
     font-family:'Times New Roman', Times, serif;
 }
 
-div, p, span {
+div, p, span, h3 {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .page-container {
@@ -82,4 +82,20 @@ input[type="submit"]:hover {
 
 .radio-container input {
     flex: 0;
+}
+
+hr {
+    width: 100%;
+}
+
+.result-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
 }
