@@ -8,16 +8,19 @@ const MongoClient = require('mongodb').MongoClient;
 const connStr = "mongodb+srv://database_user:db123@stock.zrcipph.mongodb.net/?appName=Stock";
 
 
-console.log("Server ready");
+// console.log("Server ready");
+
+// Create the server
 var server = http.createServer(function (req, res) {
     
+    // Parse the url to get the form inputs
     urlObj = url.parse(req.url, true);
-    // console.log("The URL is: " + req.url);
-    // console.log("The path is: " + urlObj.pathname);
 
+    // Load the home page
     if (req.url == "/") {
         fs.readFile("home.html", function(err, txt) {
             res.writeHead(200, {'Content-Type': 'text/html'});
+            // Catch any errors
             if (err) {
                 res.write("Error loading home.html");
             } else {
@@ -26,13 +29,14 @@ var server = http.createServer(function (req, res) {
             res.end();
         });
     }
+    // Load the process page
     else if (urlObj.pathname == "/process") {
         fs.readFile("process.html", function(err, txt) {
             res.writeHead(200, {'Content-Type': 'text/html'});
+            // Catch any errors
             if (err) {
                 res.write("Error loading process.html");
             }
-            
             else {
                 res.write(txt);
                 // Build the query according to the inputs of the form
@@ -65,9 +69,10 @@ var server = http.createServer(function (req, res) {
                             if (err) {
                                 console.log("Error with querying MongoDB: " + err);
                             }
-                            // Display each result
+                            // Display each result and log it to the console
                             else {
                                 res.write("<hr>");
+                                console.log("Searching for " + JSON.stringify(the_query));
                                 for (i = 0; i < items.length; i++) {
                                     console.log(items[i].Company + " " + items[i].Ticker + " $" + items[i].Price);
                                     res.write("<div class='result-container'>");
@@ -86,22 +91,25 @@ var server = http.createServer(function (req, res) {
             }
         });
     }
+    // For loading my styles!
     else if (urlObj.pathname == "/styles.css") {
         fs.readFile("styles.css", function(err, txt) {
             if (err) {
                 res.writeHead(404);
                 res.end("Style not found");
             } else {
-                // Browsers REQUIRE 'text/css' to apply styles
                 res.writeHead(200, {'Content-Type': 'text/css'});
                 res.end(txt);
             }
         });
-    }
+    } // End of style loading
+
+    // In all other cases, the page is not found
     else {
         res.writeHead(404, {'Content-Type': 'text/html'});
         res.write("Page not found");
         res.end();
     }
-})
-server.listen(port);
+});
+
+server.listen(port); // Listen at this port
