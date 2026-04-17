@@ -42,7 +42,9 @@ var server = http.createServer(function (req, res) {
                 // Build the query according to the inputs of the form
                 the_query = {};
                 // Search by ticker symbol
-                if (urlObj.query['input-type'] == "ticker-symbol") {
+                const input_type = urlObj.query['input-type'];
+                const search_entry = urlObj.query.stock;
+                if (input_type == "ticker-symbol") {
                     the_query = {"Ticker": urlObj.query.stock};
                 }
                 // Search by company name
@@ -71,9 +73,9 @@ var server = http.createServer(function (req, res) {
                             else {
                                 num_results = items.length;
                                 if (num_results == 0) {
-                                    res.write("There were no results for " + urlObj.query["input-type"] + "=" + urlObj.query.stock + "'<br>");
+                                    res.write("There were no results for " + input_type + "=" + search_entry + "'<br>");
                                 }
-                                res.write("Showing " + num_results + " search results for '" + urlObj.query["input-type"] + "=" + urlObj.query.stock + "'<br>");
+                                res.write("Showing " + num_results + " search results for '" + input_type + "=" + search_entry + "'<br>");
                                 console.log("Searching for " + JSON.stringify(the_query));
                                 for (i = 0; i < items.length; i++) {
                                     console.log(items[i].Company + " " + items[i].Ticker + " $" + items[i].Price);
