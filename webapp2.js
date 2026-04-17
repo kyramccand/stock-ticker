@@ -75,7 +75,9 @@ var server = http.createServer(function (req, res) {
                                 if (num_results == 0) {
                                     res.write("There were no results for " + input_type + "=" + search_entry + "'<br>");
                                 }
-                                res.write("Showing " + num_results + " search results for '" + input_type + "=" + search_entry + "'<br>");
+                                else {
+                                    res.write("Showing " + num_results + " search results for '" + input_type + "=" + search_entry + "'<br>");
+                                }
                                 console.log("Searching for " + JSON.stringify(the_query));
                                 for (i = 0; i < items.length; i++) {
                                     console.log(items[i].Company + " " + items[i].Ticker + " $" + items[i].Price);
